@@ -1,6 +1,6 @@
 from flask import Flask
 
-from views import Top4Winners, Q2,Q3, Q4,Q5,Q6
+from views import Top4Winners, Q2,Q3, Q4,Q5,Q6, Q7
 from utils.utils_response import Response
 
 app = Flask(__name__)
@@ -12,6 +12,7 @@ app.add_url_rule(f'/api/{Q3.URL}/', view_func=Q2.as_view('q3'))
 app.add_url_rule(f'/api/{Q4.URL}/', view_func=Q2.as_view('q4'))
 app.add_url_rule(f'/api/{Q5.URL}/', view_func=Q2.as_view('q5'))
 app.add_url_rule(f'/api/{Q6.URL}/', view_func=Q2.as_view('q6'))
+app.add_url_rule(f'/api/{Q7.URL}/', view_func=Q2.as_view('q7'))
 
 
 # In view i have many class, as above you can add all url for each view and expose this end URL's
