@@ -5,6 +5,7 @@
 
 import pymysql
 
+
 class MysqlConnector(object):
     __instance = None
     def __new__(cls, *args, **kwargs):

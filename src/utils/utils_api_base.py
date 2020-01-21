@@ -31,8 +31,9 @@ class RestBase(MethodView):
             #   - if status is failure send message and type to the end point
             # Response.get(_type=_type, message='message, status_code=400)
         except Exception as e:
+            raise e
             logger.error(f"OH no!!, We got few works for developers, try to figure out {e}")
-            return Response.get(_type='Unknown Error', message='Some abacd msg', status_code=500)
+            return Response.get({}, _type='Unknown Error', message='Some abacd msg', status_code=500)
         return Response.get(result_dict)
 
 
