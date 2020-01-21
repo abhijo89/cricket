@@ -20,6 +20,19 @@ class Processor(object):
     def __init__(self):
         self.__conn = MysqlConnector()
 
+    @property
+    def connection(self):
+        # Can check if connctionis closed or not .
+        return self.__conn
+
+    def execute(self, query: str, args=None):
+        if args is None:
+            args = ()
+        cursor = self.connection.cursor()
+        cursor.execute(query, args)
+        result_dict = cursor.fetchall()
+        return result_dict
+
 
 class RestBase(MethodView):
     def __init__(self):
