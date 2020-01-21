@@ -18,7 +18,7 @@ def page_not_found(e):
     return Response.get({}, _type='URL NOT FOUND', message='use /api/q2/', status_code=404)
 
 
-@flask_app.errorhandler(Exception)
+@app.errorhandler(Exception)
 def error_found(error):
     return Response.get({}, _type='INTERNAL SERVER ERROR', message='Unknown Exception', status_code=500)
 
