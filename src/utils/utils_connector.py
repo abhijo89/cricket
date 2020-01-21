@@ -12,6 +12,6 @@ class MysqlConnector(object):
 
         if MysqlConnector.__instance is None:
             MysqlConnector.__instance = pymysql.connect(host='localhost', port=3306,
-                                                        user='root', passwd='root', db='cricket',
+                                                        user='demo', passwd='demo', db='game',
                                                         cursorclass=pymysql.cursors.DictCursor)
         return MysqlConnector.__instance

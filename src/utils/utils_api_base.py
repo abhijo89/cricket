@@ -10,13 +10,20 @@ from flask.views import MethodView
 
 from utils.utils_constants import Status
 from utils.utils_response import Response
+from utils.utils_connector import MysqlConnector
 
 logger = logging.getLogger(__name__)
 
 
+class Processor(object):
+
+    def __init__(self):
+        self.__conn = MysqlConnector()
+
+
 class RestBase(MethodView):
     def __init__(self):
-
+        # As it a demo, Not interested in connection timeout or any other DB related issues
         super().__init__()
 
     def get(self) -> Flask.make_response:
@@ -36,8 +43,7 @@ class RestBase(MethodView):
             return Response.get({}, _type='Unknown Error', message='Some abacd msg', status_code=500)
         return Response.get(result_dict)
 
-
-    #@abstractmethod
+    # @abstractmethod
     def process_post(self, *args: str, **kwargs: str) -> Tuple[str, dict]:
         return Status.FAILURE.value, {}
 
@@ -48,7 +54,6 @@ class RestBase(MethodView):
     def __validate_mandatory_parameters(self) -> Tuple[str, str]:
         # Validate the mandatory params, if need in the the views
         return Status.SUCCESS.value, "Validate mandatory successful."
-
 
     @property
     @abstractmethod
@@ -64,7 +69,6 @@ class RestBase(MethodView):
         # Use jsonSchema to validate the post params
         return Status.SUCCESS, None, None
 
-
     @property
     def post_data(self):
         return self._request
@@ -72,4 +76,3 @@ class RestBase(MethodView):
     def post(self, *args, **kwargs):
         # the same way we implemented GET we can implement POS Also. For now ignoring code, as i am not using it.
         return Response.get({})
-
