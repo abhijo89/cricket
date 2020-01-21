@@ -7,10 +7,13 @@ class Top4Winners(RestBase, Processor):
 
     def process_get(self):
         sql = "SELECT winner FROM matches WHERE season=%s GROUP BY winner ORDER BY COUNT(*) DESC LIMIT 4"
-        args = (2014,)  # IT can going fwd dynamic , get from url param
+        args = (2014,)  # it get from url param and construct query dynamically :D , Not spending time on this. :)
         result_dict = self.execute(sql, args)
         return Status.SUCCESS, None, None, result_dict
 
+
+# From here i an not bothered about naming convention, or url
+# If you know What is the SQL Query , You are really done with  the view :)
 
 class Q2(RestBase, Processor):
     URL = 'q2'
@@ -31,9 +34,10 @@ class Q3(RestBase, Processor):
         sql = "SELECT player_of_match, COUNT(*) AS max_awards FROM matches " \
               "WHERE season=%s GROUP BY player_of_match order by count(*) DESC LIMIT %s "
 
-        args = (2014, 1)  # IT can going fwd dynamic , get from url param
+        args = (2014, 1)  # I can going fwd dynamic , get from url param
         result_dict = self.execute(sql, args)
         return Status.SUCCESS, None, None, result_dict
+
 
 class Q4(RestBase, Processor):
     URL = 'q4'
@@ -41,7 +45,7 @@ class Q4(RestBase, Processor):
     def process_get(self):
         sql = "SELECT  COUNT(*), winner FROM matches group by winner order by count(*) DESC LIMIT %s "
 
-        args = (10, )  # IT can going fwd dynamic , get from url param
+        args = (10,)  # IT can going fwd dynamic , get from url param
         result_dict = self.execute(sql, args)
         return Status.SUCCESS, None, None, result_dict
 
@@ -66,9 +70,10 @@ class Q6(RestBase, Processor):
               "WHERE toss_decision='bat') * 100 as per, toss_winner " \
               "FROM matches WHERE season=%s AND toss_decision=%s group by toss_winner order by per desc"
 
-        args = (2014, 'bat', )  # IT can going fwd dynamic , get from url param
+        args = (2014, 'bat',)  # IT can going fwd dynamic , get from url param
         result_dict = self.execute(sql, args)
         return Status.SUCCESS, None, None, result_dict
+
 
 class Q7(RestBase, Processor):
     URL = 'q7'
@@ -78,6 +83,8 @@ class Q7(RestBase, Processor):
               "WHERE toss_decision='bat') * 100 as per, toss_winner " \
               "FROM matches WHERE season=%s AND toss_decision=%s group by toss_winner order by per desc"
 
-        args = (2014, 'bat', )  # IT can going fwd dynamic , get from url param
+        args = (2014, 'bat',)  # IT can going fwd dynamic , get from url param
         result_dict = self.execute(sql, args)
         return Status.SUCCESS, None, None, result_dict
+
+
